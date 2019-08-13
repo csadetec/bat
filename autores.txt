@@ -1,0 +1,8 @@
+======== files/lista geral.XLSX
+File Name                       : lista geral.XLSX
+======== files/planilha.xls
+Author                          : Edina
+File Name                       : planilha.xls
+======== files/teste.xls
+File Name                       : teste.xls
+    3 image files read

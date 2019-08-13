@@ -20,3 +20,5 @@ for /f "tokens=*" %a in (lista.txt) do (
 		
 )
 
+exiftool.exe -Author planilha.xls
+e.exe -T -author -filename files/* > autores.xlsx
