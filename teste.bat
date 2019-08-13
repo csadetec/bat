@@ -20,3 +20,4 @@ for /f "tokens=*" %a in (lista.txt) do (
 		
 )
 
+wine e.exe -T -author -filename files/*
