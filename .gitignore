@@ -1,6 +1,7 @@
 .DS_Store
 node_mudules/
-
+autores/
+arquivos/
 composer.lock
 
 user_guide_src/build/*

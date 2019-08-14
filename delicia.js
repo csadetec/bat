@@ -1,44 +1,51 @@
 const xlsx  = require('xlsx')
+const fs = require('fs')
 
 const workbook = xlsx.readFile('autores.xlsx')
 const sheet = workbook.SheetNames
-/**/
-const mysql = require('mysql')
-const connection = mysql.createConnection({
-	host:'localhost',
-	user:'server',
-	password:'server',
-	database:'bat'
-})
-
-connection.connect(function(err){
-	if(err)return console.log(err)
-	
-})
 
 var autor = xlsx.utils.sheet_to_json(workbook.Sheets[sheet[0]])
-const sql = "INSERT INTO arquivos(nome, arquivo) VALUES ?";
 
-var values = [
-	for(r in autor){'INSERT INTO arquivos(nome, arquivo) VALUES (\'-\', \'000083072.ppt\')'
-		[autor[r].nome, autor[r].arquivo],
+//make folder
+if(!fs.existsSync(`./autores/sem_autores`)){
+	fs.mkdirSync(`./autores/sem_autores`)	
+}
+/** */
+for(r in autor){
+	let a = autor[r].nome
+	//a = a.replace('//', '')
+	
+	if(!fs.existsSync(`./autores/${a}`)){
+		fs.mkdirSync(`./autores/${a}`)	
+		//console.log(a)
+		//var res = str.replace("Microsoft", "W3Schools");
 	}
-]
+	/** */
 
+}
 
-console.log(values)
-	  
-/*
-connection.query(sql, [values], function (error, results, fields){
-    if(error) return console.log(error)
-    console.log('adicionou registros!')
-    connection.end();//fecha a conexão
+// move files to your authors	
+for(r in autor){
+	var a = autor[r].nome
+	var file = autor[r].arquivo
+	if(a == '.' || a == '-' || a == '*' || a == '..' || a == ''){
+	//	console.log(a + r)
+		if(fs.existsSync(`./arquivos/${file}`)){
+			fs.renameSync(`./arquivos/${file}`, `./autores/sem_autor/${file}`)
+		}
+	} else if(fs.existsSync(`./arquivos/${file}`)){
+		fs.renameSync(`./arquivos/${file}`, `./autores/${a}/${file}`)
+//			
+	}
+}
+
+//arquivos qtd
+fs.readdir('./arquivos', (err, files) => {
+	console.log('Qtd de arquivos: '+files.length);
 })
 
-/**/
-/*
-
-for(r in autor){
-	var [r] console.log(autor[r].nome)
-}
-/**/
+//pastas autores qtd
+fs.readdir('./autores', (err, files) => {
+	console.log('Qtd de arquivos: '+files.length);
+//	console.log(files)
+})
