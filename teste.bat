@@ -21,3 +21,9 @@ for /f "tokens=*" %a in (lista.txt) do (
 )
 
 wine e.exe -T -author -filename files/*
+
+create table arquivos(
+    id int not null primary key auto_increment,
+	autor varchar(200),
+    nome varchar(250)
+);
